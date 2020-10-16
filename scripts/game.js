@@ -6,6 +6,8 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Container = PIXI.Container;
 
+//test
+
 //Create a Pixi Application
 let app = new Application({});
 
@@ -37,6 +39,12 @@ mapContainer.on("pointermove", ((event) => {
 
 PIXI.loader.add("images/cat.png").load(() => {
     let catSprite = new Sprite(TextureCache["images/cat.png"]);
+
+    catSprite.interactive = true;
+
+    catSprite.mousedown = () => {
+
+    };
 
     mapContainer.addChild(catSprite);
 });
