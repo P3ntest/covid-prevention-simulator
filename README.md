@@ -1,1 +1,1 @@
-# covid-prevention-simulator
+# pleague-prevention-simulator
