@@ -67,6 +67,18 @@ document.addEventListener("mousewheel", (event) => {
     mapContainer.y = mapY;
 }, false);
 
+let coronaHotspot = new PIXI.Graphics();
+coronaHotspot.beginFill(0xFF0000);
+// coronaHotspot.lineStyle(10, 0x880000, 1);
+coronaHotspot.drawCircle(0, 0, 50);
+coronaHotspot.endFill();
+coronaHotspot.x = 100;
+coronaHotspot.y = 100;
+coronaHotspot.alpha = 0.6;
+coronaHotspot.pivot.set(25, 25);
+mapContainer.addChild(coronaHotspot);
+mapContainer.sortableChildren = true;
+
 
 PIXI.loader.add("images/map.png").load(() => {
     let mapSprite = new Sprite(TextureCache["images/map.png"]);
@@ -74,5 +86,10 @@ PIXI.loader.add("images/map.png").load(() => {
     mapSprite.width = 1920;
     mapSprite.height = 1080;
 
+    // mapSprite.alpha = 0.5;
+
     mapContainer.addChild(mapSprite);
+
+    coronaHotspot.zIndex = 10;
+    mapSprite.zIndex = -10;
 });
