@@ -19,6 +19,7 @@ app.renderer.view.style.display = "block";
 app.renderer.autoResize = true;
 app.renderer.resize(window.innerWidth, window.innerHeight);
 
+
 let mapContainer = new Container();
 app.stage.addChild(mapContainer);
 //mapContainerMouseDown.interactive = true;
@@ -37,14 +38,41 @@ mapContainer.on("pointermove", ((event) => {
     }
 }));
 
-PIXI.loader.add("images/cat.png").load(() => {
-    let catSprite = new Sprite(TextureCache["images/cat.png"]);
+var currentMapContainerZoom = 1;
 
-    catSprite.interactive = true;
+document.addEventListener("mousewheel", (event) => {
+    currentMapContainerZoom += event.wheelDeltaY * -0.001;
+    currentMapContainerZoom = Math.max(1, currentMapContainerZoom);
+    currentMapContainerZoom = Math.min(4, currentMapContainerZoom);
 
-    catSprite.mousedown = () => {
+    let mousePos = app.renderer.plugins.interaction.mouse.global;
 
-    };
+    let partX = (mousePos.x - mapContainer.x) / mapContainer.width;
+    let partY = (mousePos.y - mapContainer.y) / mapContainer.height;
 
-    mapContainer.addChild(catSprite);
+    mapContainer.scale.set(currentMapContainerZoom, currentMapContainerZoom);
+
+    let mapX = Math.min(0, mousePos.x - partX * mapContainer.width);
+    let mapY = Math.min(0, mousePos.y - partY * mapContainer.height);
+
+    if (mapX + mapContainer.width < window.innerWidth) {
+        mapX = window.innerWidth - mapContainer.width;
+    }
+
+    if (mapY + mapContainer.height < window.innerHeight) {
+        mapY = window.innerHeight - mapContainer.height;
+    }
+
+    mapContainer.x = mapX;
+    mapContainer.y = mapY;
+}, false);
+
+
+PIXI.loader.add("images/map.png").load(() => {
+    let mapSprite = new Sprite(TextureCache["images/map.png"]);
+
+    mapSprite.width = 1920;
+    mapSprite.height = 1080;
+
+    mapContainer.addChild(mapSprite);
 });
