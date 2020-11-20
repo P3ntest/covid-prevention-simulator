@@ -6,66 +6,20 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Container = PIXI.Container;
 
-//test
-
-//Create a Pixi Application
 let app = new Application({});
 
-//Add the canvas that Pixi automatically created for you to the HTML document
-document.body.appendChild(app.view);
+document.getElementById("game-container").appendChild(app.view);
 
-app.renderer.view.style.position = "absolute";
-app.renderer.view.style.display = "block";
-app.renderer.autoResize = true;
-app.renderer.resize(window.innerWidth, window.innerHeight);
+app.renderer.resize(window.innerWidth - 250, window.innerHeight);
+document.getElementById("game-container").style.width = window.innerWidth - 250;
 
 
 let mapContainer = new Container();
 app.stage.addChild(mapContainer);
-//mapContainerMouseDown.interactive = true;
 let mapContainerMouseDown = false;
 
-mapContainer.on("mousedown", () => {
-    mapContainerMouseDown = true;
-    console.log(true);
-});
-mapContainer.on("mouseup", () => {
-    mapContainerMouseDown = false;
-});
-mapContainer.on("pointermove", ((event) => {
-    if (mapContainerMouseDown) {
-        console.log(event);
-    }
-}));
 
-var currentMapContainerZoom = 1;
 
-document.addEventListener("mousewheel", (event) => {
-    currentMapContainerZoom += event.wheelDeltaY * -0.001;
-    currentMapContainerZoom = Math.max(1, currentMapContainerZoom);
-    currentMapContainerZoom = Math.min(4, currentMapContainerZoom);
-
-    let mousePos = app.renderer.plugins.interaction.mouse.global;
-
-    let partX = (mousePos.x - mapContainer.x) / mapContainer.width;
-    let partY = (mousePos.y - mapContainer.y) / mapContainer.height;
-
-    mapContainer.scale.set(currentMapContainerZoom, currentMapContainerZoom);
-
-    let mapX = Math.min(0, mousePos.x - partX * mapContainer.width);
-    let mapY = Math.min(0, mousePos.y - partY * mapContainer.height);
-
-    if (mapX + mapContainer.width < window.innerWidth) {
-        mapX = window.innerWidth - mapContainer.width;
-    }
-
-    if (mapY + mapContainer.height < window.innerHeight) {
-        mapY = window.innerHeight - mapContainer.height;
-    }
-
-    mapContainer.x = mapX;
-    mapContainer.y = mapY;
-}, false);
 
 let coronaHotspot = new PIXI.Graphics();
 coronaHotspot.beginFill(0xFF0000);
@@ -93,3 +47,7 @@ PIXI.loader.add("images/map.png").load(() => {
     coronaHotspot.zIndex = 10;
     mapSprite.zIndex = -10;
 });
+
+let overGameContainer = false;
+document.getElementById("game-container").addEventListener("mouseenter", () => {overGameContainer = true});
+document.getElementById("game-container").addEventListener("mouseleave", () => {overGameContainer = false});
