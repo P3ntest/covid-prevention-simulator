@@ -10,6 +10,17 @@
     font-family: 'Roboto', sans-serif;
 }
 
+.hotspot-hover {
+    position: fixed;
+    background-color: #444;
+    width: 100px;
+    height: 40px;
+    border-radius: 7px;
+    opacity: 0;
+
+    top: 100px;
+}
+
 .general-info {
     font-size: 20px;
     text-align: center;
@@ -22,6 +33,7 @@
     background-color: #999;
     margin: auto;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .game-container {

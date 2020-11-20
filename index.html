@@ -7,12 +7,19 @@
     <style>* {padding: 0; margin: 0}</style>
     <link rel="stylesheet" href="index.css">
     <script src="scripts/pixi.min.js"></script>
+
+    <script src="scripts/hotspots.js"></script>
     <script src="scripts/game.js" defer></script>
     <script src="scripts/zoomPan.js" defer></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 </head>
 <body>
+
+    <div id="hotspot-hover" class="hotspot-hover">
+
+    </div>
+
     <div class="main">    
         <div id="game-container" class="game-container">
             
@@ -23,7 +30,10 @@
             <div class="general-info">Deaths: 3M 💀</div>
             <div class="general-info">Hotspots: 12 🔴</div>
             <div class="general-info">Time Left: 2d 22h 🕒</div>
+            <div class="general-info">Average Happiness: 78%</div>
+            <div class="general-info">Average Trust: 99%</div>
             <div class="seperator"></div>
+            <div class="general-info" id="region-title">Select a region!</div>
         </div> 
     </div>
 

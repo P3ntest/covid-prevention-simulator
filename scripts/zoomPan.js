@@ -31,12 +31,15 @@ document.addEventListener("mousewheel", (event) => {
     let mapX = Math.min(0, mousePos.x - partX * mapContainer.width);
     let mapY = Math.min(0, mousePos.y - partY * mapContainer.height);
 
-    if (mapX + mapContainer.width < window.innerWidth) {
-        mapX = window.innerWidth - mapContainer.width;
+    let gameW = document.getElementById("game-container").getBoundingClientRect().width;
+    let gameH = document.getElementById("game-container").getBoundingClientRect().height;
+
+    if (mapX + mapContainer.width < gameW) {
+        mapX = gameW - mapContainer.width;
     }
 
-    if (mapY + mapContainer.height < window.innerHeight) {
-        mapY = window.innerHeight - mapContainer.height;
+    if (mapY + mapContainer.height < gameH) {
+        mapY = gameH - mapContainer.height;
     }
 
     mapContainer.x = mapX;
