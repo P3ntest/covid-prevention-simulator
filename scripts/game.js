@@ -72,16 +72,27 @@ function updateGlobalStats() {
     let deaths = 0;
     let hotspotsCount = 0;
 
+    let happiness = [];
+    let trust = [];
+
     hotspots.forEach(hotspot => {
         infections += hotspot.infections;
         deaths += hotspot.deaths;
         if (true) //Check if infections/deaths has reached a certain percentage of total area populatino (=> is a hotstpo)
             hotspotsCount++;
+
+        happiness.push(hotspot.happiness);
+        trust.push(hotspot.trust);
     });
+
+    let globalHappiness = Math.floor(happiness.reduce((a, b) => a + b, 0) / happiness.length * 100);
+    let globalTrust = Math.floor(trust.reduce((a, b) => a + b, 0) / trust.length * 100);
 
     document.getElementById("global-infections").innerText = infections;
     document.getElementById("global-deaths").innerText = deaths;
     document.getElementById("total-hotspots").innerText = hotspotsCount;
+    document.getElementById("global-happiness").innerText = globalHappiness;
+    document.getElementById("global-trust").innerText = globalTrust;
 }
 
 updateGlobalStats();
