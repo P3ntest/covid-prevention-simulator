@@ -22,12 +22,12 @@ let gameW = document.getElementById("game-container").getBoundingClientRect().wi
 let gameH = document.getElementById("game-container").getBoundingClientRect().height;
 hotspots.forEach(hotspot => {
     hotspot.graphic = new PIXI.Graphics();
-    hotspot.graphic.beginFill(0x0000FF);
+    hotspot.graphic.beginFill(0x44AA22);
     hotspot.graphic.drawCircle(0, 0, 20);
     hotspot.graphic.endFill();
     hotspot.graphic.x = gameW * hotspot.x;
     hotspot.graphic.y = gameH * hotspot.y;
-    hotspot.graphic.alpha = 0.6;
+    hotspot.graphic.alpha = 0.9;
     hotspot.graphic.pivot.set(25, 25);
     hotspot.graphic.interactive = true;
     hotspot.graphic.hitArea = new PIXI.Circle(0, 0, 20);
@@ -66,3 +66,22 @@ PIXI.loader.add("images/map.png").load(() => {
 let overGameContainer = false;
 document.getElementById("game-container").addEventListener("mouseenter", () => {overGameContainer = true});
 document.getElementById("game-container").addEventListener("mouseleave", () => {overGameContainer = false});
+
+function updateGlobalStats() {
+    let infections = 0;
+    let deaths = 0;
+    let hotspotsCount = 0;
+
+    hotspots.forEach(hotspot => {
+        infections += hotspot.infections;
+        deaths += hotspot.deaths;
+        if (true) //Check if infections/deaths has reached a certain percentage of total area populatino (=> is a hotstpo)
+            hotspotsCount++;
+    });
+
+    document.getElementById("global-infections").innerText = infections;
+    document.getElementById("global-deaths").innerText = deaths;
+    document.getElementById("total-hotspots").innerText = hotspotsCount;
+}
+
+updateGlobalStats();
