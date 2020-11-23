@@ -26,7 +26,7 @@ hotspots.forEach(hotspot => {
     hotspot.graphic.drawCircle(0, 0, 20);
     hotspot.graphic.endFill();
     hotspot.graphic.x = gameW * hotspot.x;
-    hotspot.graphic.y = gameW * hotspot.x;
+    hotspot.graphic.y = gameH * hotspot.y;
     hotspot.graphic.alpha = 0.6;
     hotspot.graphic.pivot.set(25, 25);
     hotspot.graphic.interactive = true;
