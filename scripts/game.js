@@ -26,7 +26,7 @@ hotspots.forEach(hotspot => {
     hotspot.graphic.drawCircle(0, 0, 20);
     hotspot.graphic.endFill();
     hotspot.graphic.x = gameW * hotspot.x;
-    hotspot.graphic.y = gameH * hotspot.y;
+    hotspot.graphic.y = gameW * hotspot.x;
     hotspot.graphic.alpha = 0.6;
     hotspot.graphic.pivot.set(25, 25);
     hotspot.graphic.interactive = true;
@@ -35,20 +35,6 @@ hotspots.forEach(hotspot => {
     hotspot.graphic.zIndex = 10;
 
     hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
-
-    hotspot.graphic.mouseover = (event) => {
-        let hover = document.getElementById("hotspot-hover");
-        hover.style.opacity = 1;
-
-        hover.innerHTML = hotspot.name;
-
-        hover.style.left = (event.data.global.x - hover.getBoundingClientRect().width / 2) + "px";
-        hover.style.top = (event.data.global.y + 20) + "px";
-    }
-
-    hotspot.graphic.mouseout = () => {
-        document.getElementById("hotspot-hover").style.opacity = 0;
-    }
 });
 
 function setClickedHotspot(hotspot) {
