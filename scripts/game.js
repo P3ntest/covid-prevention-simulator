@@ -36,11 +36,14 @@ hotspots.forEach(hotspot => {
 
     hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
 
-    hotspot.graphic.mouseover = () => {
+    hotspot.graphic.mouseover = (event) => {
         let hover = document.getElementById("hotspot-hover");
         hover.style.opacity = 1;
-        hover.style.left = hotspot.graphic.x + "px";
-        hover.style.top = hotspot.graphic.y + "px";
+
+        hover.innerHTML = hotspot.name;
+
+        hover.style.left = (event.data.global.x - hover.getBoundingClientRect().width / 2) + "px";
+        hover.style.top = (event.data.global.y + 20) + "px";
     }
 
     hotspot.graphic.mouseout = () => {
