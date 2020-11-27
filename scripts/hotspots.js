@@ -16,6 +16,8 @@ let hotspots = [
     },
 ];
 
+
+//Set defualt values for all hotspots
 hotspots.forEach(hotspot => {
     hotspot.happiness = 1;
     hotspot.trust = 1;
