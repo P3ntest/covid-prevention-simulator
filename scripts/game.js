@@ -13,8 +13,6 @@ let app = new Application({});
 document.getElementById("game-container").appendChild(app.view);
 app.renderer.resize(window.innerWidth - 250, window.innerHeight);
 document.getElementById("game-container").style.width = window.innerWidth - 250;
-let gameW = document.getElementById("game-container").getBoundingClientRect().width;
-let gameH = document.getElementById("game-container").getBoundingClientRect().height;
 
 let mapContainer = new Container();
 app.stage.addChild(mapContainer);
@@ -52,6 +50,8 @@ PIXI.loader.add("images/map.png").load(() => {
 hotspots[Math.floor(Math.random() * hotspots.length)].infections = 1; // Infect 1 person.
 
 //Add Hotspot Circles
-redrawHotspots();
+setTimeout(redrawHotspots, 100);
 
 updateGlobalStats();
+
+// tick();

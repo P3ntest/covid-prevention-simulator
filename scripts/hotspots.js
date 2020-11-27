@@ -9,6 +9,8 @@ let hotspots = [
         x: 0.48,
         y: 0.24,
         name: "Europe",
+        population: 741000000, // people
+        area: 10180000 // km^2
     },
     {
         x: 0.7,
@@ -31,6 +33,8 @@ hotspots.forEach(hotspot => {
         hotspot.happiness = 1;
     if (!hotspot.trust)
         hotspot.trust = 1;
+    if (!hotspot.info)
+        hotspot.info = 0.2;
     hotspot.infections = 0;
     hotspot.deaths = 0;
 });
