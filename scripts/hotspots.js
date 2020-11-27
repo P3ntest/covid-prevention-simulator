@@ -33,4 +33,31 @@ hotspots.forEach(hotspot => {
         hotspot.trust = 1;
     hotspot.infections = 0;
     hotspot.deaths = 0;
-})
+});
+
+function redrawHotspots() {
+    hotspots.forEach((hotspot) => {
+        drawHotspot(hotspot);
+    });
+}
+
+function drawHotspot(hotspot) {
+    if (hotspot.graphic)
+        hotspot.graphic.clear();
+    else 
+        hotspot.graphic = new PIXI.Graphics();
+
+    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xff913d); // Color if no infections = green || orange
+    hotspot.graphic.drawCircle(0, 0, 20);
+    hotspot.graphic.endFill();
+    hotspot.graphic.x = gameW * hotspot.x;
+    hotspot.graphic.y = gameH * hotspot.y;
+    hotspot.graphic.alpha = 0.9;
+    hotspot.graphic.pivot.set(25, 25);
+    hotspot.graphic.interactive = true;
+    hotspot.graphic.hitArea = new PIXI.Circle(0, 0, 20);
+    mapContainer.addChild(hotspot.graphic);
+    hotspot.graphic.zIndex = 10;
+
+    hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
+}
