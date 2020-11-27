@@ -22,8 +22,13 @@ let overGameContainer = false;
 document.getElementById("game-container").addEventListener("mouseenter", () => {overGameContainer = true});
 document.getElementById("game-container").addEventListener("mouseleave", () => {overGameContainer = false});
 
+let timeToVaccine = 8600; //hours;
+
+let clickedHotspot = null;
+
 // Keep empty function for future features
 function setClickedHotspot(hotspot) {
+    clickedHotspot = hotspot;
     setRegionStats(hotspot)
 }
 
@@ -50,8 +55,8 @@ PIXI.loader.add("images/map.png").load(() => {
 hotspots[Math.floor(Math.random() * hotspots.length)].infections = 1; // Infect 1 person.
 
 //Add Hotspot Circles
-setTimeout(redrawHotspots, 100);
+redrawHotspots();
 
 updateGlobalStats();
 
-// tick();
+tick();

@@ -12,7 +12,8 @@ function updateGlobalStats() {
     hotspots.forEach(hotspot => {
         infections += hotspot.infections;
         deaths += hotspot.deaths;
-        if (true) //Check if infections/deaths has reached a certain percentage of total area population (=> is a hotstpot)
+
+        if (infections > 0) //Check if infections/deaths has reached a certain percentage of total area population (=> is a hotstpot)
             hotspotsCount++;
 
         happiness.push(hotspot.happiness);
@@ -28,6 +29,7 @@ function updateGlobalStats() {
     document.getElementById("total-hotspots").innerText = hotspotsCount;
     document.getElementById("global-happiness").innerText = globalHappiness;
     document.getElementById("global-trust").innerText = globalTrust;
+    document.getElementById("time-left").innerText = timeToVaccine;
 }
 
 function setRegionStats(hotspot) {

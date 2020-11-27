@@ -3,7 +3,7 @@ let hotspots = [
         x: 0.53,
         y: 0.19,
         name: "Moscow",
-        happiness: 0.8
+        happiness: 0.8,
     },
     {
         x: 0.48,
@@ -46,6 +46,10 @@ function redrawHotspots() {
 }
 
 function drawHotspot(hotspot) {
+
+    let gameW = document.getElementById("game-container").getBoundingClientRect().width;
+    let gameH = document.getElementById("game-container").getBoundingClientRect().height;
+
     if (hotspot.graphic)
         hotspot.graphic.clear();
     else 
