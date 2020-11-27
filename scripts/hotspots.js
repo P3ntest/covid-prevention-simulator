@@ -13,7 +13,7 @@ let hotspots = [
         x: 0.7,
         y: 0.17,
         name: "Siberia"
-    },
+    }
 ];
 
 
