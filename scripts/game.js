@@ -6,18 +6,21 @@ let Application = PIXI.Application,
     TextureCache = PIXI.utils.TextureCache,
     Container = PIXI.Container;
 
+//Initiate Pixi Framework
 let app = new Application({});
 
+//Add Pixi to the DOM
 document.getElementById("game-container").appendChild(app.view);
 
 app.renderer.resize(window.innerWidth - 250, window.innerHeight);
 document.getElementById("game-container").style.width = window.innerWidth - 250;
 
-
+//Init mapCOntainer
 let mapContainer = new Container();
 app.stage.addChild(mapContainer);
 let mapContainerMouseDown = false;
 
+//Add Hotspot Circles
 let gameW = document.getElementById("game-container").getBoundingClientRect().width;
 let gameH = document.getElementById("game-container").getBoundingClientRect().height;
 hotspots.forEach(hotspot => {
@@ -51,6 +54,7 @@ app.view.onmousemove = (ev) => {
     }
 }
 
+//Load map image
 PIXI.loader.add("images/map.png").load(() => {
     let mapSprite = new Sprite(TextureCache["images/map.png"]);
     
@@ -67,6 +71,7 @@ let overGameContainer = false;
 document.getElementById("game-container").addEventListener("mouseenter", () => {overGameContainer = true});
 document.getElementById("game-container").addEventListener("mouseleave", () => {overGameContainer = false});
 
+//Set correct values to the right menu stats
 function updateGlobalStats() {
     let infections = 0;
     let deaths = 0;
