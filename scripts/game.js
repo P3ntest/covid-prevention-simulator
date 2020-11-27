@@ -24,20 +24,7 @@ let mapContainerMouseDown = false;
 let gameW = document.getElementById("game-container").getBoundingClientRect().width;
 let gameH = document.getElementById("game-container").getBoundingClientRect().height;
 hotspots.forEach(hotspot => {
-    hotspot.graphic = new PIXI.Graphics();
-    hotspot.graphic.beginFill(0x44AA22);
-    hotspot.graphic.drawCircle(0, 0, 20);
-    hotspot.graphic.endFill();
-    hotspot.graphic.x = gameW * hotspot.x;
-    hotspot.graphic.y = gameH * hotspot.y;
-    hotspot.graphic.alpha = 0.9;
-    hotspot.graphic.pivot.set(25, 25);
-    hotspot.graphic.interactive = true;
-    hotspot.graphic.hitArea = new PIXI.Circle(0, 0, 20);
-    mapContainer.addChild(hotspot.graphic);
-    hotspot.graphic.zIndex = 10;
-
-    hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
+    drawHotspot(hotspot);
 });
 
 // Keep empty function for future features
@@ -71,6 +58,33 @@ PIXI.loader.add("images/map.png").load(() => {
 let overGameContainer = false;
 document.getElementById("game-container").addEventListener("mouseenter", () => {overGameContainer = true});
 document.getElementById("game-container").addEventListener("mouseleave", () => {overGameContainer = false});
+
+function redrawHotspots() {
+    hotspots.forEach((hotspot) => {
+        drawHotspot(hotspot);
+    });
+}
+
+function drawHotspot(hotspot) {
+    if (hotspot.graphic)
+        hotspot.graphic.clear();
+    else 
+        hotspot.graphic = new PIXI.Graphics();
+
+    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xcc11cc); // Color if no infections = green || orange
+    hotspot.graphic.drawCircle(0, 0, 20);
+    hotspot.graphic.endFill();
+    hotspot.graphic.x = gameW * hotspot.x;
+    hotspot.graphic.y = gameH * hotspot.y;
+    hotspot.graphic.alpha = 0.9;
+    hotspot.graphic.pivot.set(25, 25);
+    hotspot.graphic.interactive = true;
+    hotspot.graphic.hitArea = new PIXI.Circle(0, 0, 20);
+    mapContainer.addChild(hotspot.graphic);
+    hotspot.graphic.zIndex = 10;
+
+    hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
+}
 
 function setRegionStats(hotspot) {
     document.getElementById("region-infections").innerText = hotspot.infections;
@@ -109,5 +123,8 @@ function updateGlobalStats() {
     document.getElementById("global-happiness").innerText = globalHappiness;
     document.getElementById("global-trust").innerText = globalTrust;
 }
+
+hotspots[Math.floor(Math.random() * hotspots.length)].infections = 1; // Infect 1 person.
+redrawHotspots();
 
 updateGlobalStats();
