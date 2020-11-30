@@ -7,7 +7,9 @@ let Application = PIXI.Application,
     Container = PIXI.Container;
 
 //Initiate Pixi Framework
-let app = new Application({});
+let app = new Application({
+    antialias: true
+});
 
 //Add Pixi to the DOM
 document.getElementById("game-container").appendChild(app.view);

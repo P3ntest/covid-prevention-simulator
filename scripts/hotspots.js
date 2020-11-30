@@ -45,6 +45,8 @@ function redrawHotspots() {
     });
 }
 
+const hotspotBorderLength = 6;
+
 function drawHotspot(hotspot) {
 
     let gameW = document.getElementById("game-container").getBoundingClientRect().width;
@@ -55,15 +57,20 @@ function drawHotspot(hotspot) {
     else 
         hotspot.graphic = new PIXI.Graphics();
 
-    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xff913d); // Color if no infections = green || orange
-    hotspot.graphic.drawCircle(0, 0, 20);
+    let radius = (hotspot.infections / hotspot.population) * 25 + 5;
+
+    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xfe5573); // Color if no infections = green || orange
+    hotspot.graphic.drawCircle(0, 0, radius + hotspotBorderLength);
+    hotspot.graphic.endFill();
+
+    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xff235a); // Color if no infections = green || orange
+    hotspot.graphic.drawCircle(0, 0, radius);
     hotspot.graphic.endFill();
     hotspot.graphic.x = gameW * hotspot.x;
     hotspot.graphic.y = gameH * hotspot.y;
-    hotspot.graphic.alpha = 0.9;
     hotspot.graphic.pivot.set(25, 25);
     hotspot.graphic.interactive = true;
-    hotspot.graphic.hitArea = new PIXI.Circle(0, 0, 20);
+    hotspot.graphic.hitArea = new PIXI.Circle(0, 0, radius + hotspotBorderLength);
     mapContainer.addChild(hotspot.graphic);
     hotspot.graphic.zIndex = 10;
 

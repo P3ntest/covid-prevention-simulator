@@ -22,7 +22,7 @@ function spreadChance(from, to) {
         Math.pow(Math.abs(from.y - to.y), 2)
     )
 
-    return (1 - prevention(from) * prevention(to) * distance) * from.infections * (1 - from.info) / 200;
+    return (1 - prevention(from) * prevention(to) * distance) * from.infections * (1 - from.info) / 1000;
 }
 
 //Code block to execute every tick;
