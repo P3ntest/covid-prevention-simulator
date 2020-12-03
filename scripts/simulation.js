@@ -35,7 +35,6 @@ const tick = () => {
         //Check for spread
         hotspots.forEach(to => {
             if (to != hotspot) {
-                console.log(spreadChance(hotspot, to));
                 if (Math.random() < spreadChance(hotspot, to))
                     to.infections++;    
             }

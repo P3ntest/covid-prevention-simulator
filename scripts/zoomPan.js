@@ -1,17 +1,52 @@
 var currentMapContainerZoom = 1;
+let mouseDown = false;
 
-mapContainer.on("mousedown", () => {
-    mapContainerMouseDown = true;
-    console.log(true);
-});
-mapContainer.on("mouseup", () => {
-    mapContainerMouseDown = false;
-});
-mapContainer.on("pointermove", ((event) => {
-    if (mapContainerMouseDown) {
-        console.log(event);
+let overGameContainer = false;
+document.getElementById("game-container").addEventListener("mouseenter", () => {overGameContainer = true});
+document.getElementById("game-container").addEventListener("mouseleave", () => {overGameContainer = false});
+
+let from = {};
+
+document.getElementById("game-container").addEventListener("mousedown", (event) => {
+    mouseDown = true;
+
+    if (overGameContainer) {
+        from.x = event.screenX;
+        from.y = event.screenY;
     }
-}));
+});
+
+document.getElementById("game-container").addEventListener("mouseup", (event) => {
+    mouseDown = false;
+});
+
+document.getElementById("game-container").addEventListener("mousemove", (event) => {
+    if (mouseDown && overGameContainer) {
+        pan(event);
+        from.x = event.screenX;
+        from.y = event.screenY;
+    }
+})
+
+function pan(event) {
+    let xDelta = event.screenX - from.x;
+    let yDelta = event.screenY - from.y;
+
+    let mapX =  mapContainer.x + xDelta;
+    let mapY = mapContainer.y + yDelta;
+
+    let gameW = document.getElementById("game-container").getBoundingClientRect().width;
+    let gameH = document.getElementById("game-container").getBoundingClientRect().height;
+
+    mapX = Math.min(0, mapX);
+    mapY = Math.min(0, mapY);
+
+    mapX = Math.max(gameW - mapContainer.width, mapX);
+    mapY = Math.max(gameH - mapContainer.height, mapY);
+
+    mapContainer.x = mapX;
+    mapContainer.y = mapY;
+}
 
 document.addEventListener("mousewheel", (event) => {
     if (!overGameContainer)
