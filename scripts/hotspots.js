@@ -65,20 +65,22 @@ function drawHotspot(hotspot) {
 
     let radius = (hotspot.infections / hotspot.population) * 25 + 5;
 
-    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xfe5573); // Color if no infections = green || orange
-    hotspot.graphic.drawCircle(0, 0, radius + hotspotBorderLength);
-    hotspot.graphic.endFill();
-
-    hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xff235a); // Color if no infections = green || orange
-    hotspot.graphic.drawCircle(0, 0, radius);
-    hotspot.graphic.endFill();
-    hotspot.graphic.x = gameW * hotspot.x;
-    hotspot.graphic.y = gameH * hotspot.y;
-    hotspot.graphic.pivot.set(25, 25);
-    hotspot.graphic.interactive = true;
-    hotspot.graphic.hitArea = new PIXI.Circle(0, 0, radius + hotspotBorderLength);
-    mapContainer.addChild(hotspot.graphic);
-    hotspot.graphic.zIndex = 10;
-
-    hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
+    if (hotspot.infections > 0 || devView) {
+        hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xfe5573); // Color if no infections = green || orange
+        hotspot.graphic.drawCircle(0, 0, radius + hotspotBorderLength);
+        hotspot.graphic.endFill();
+    
+        hotspot.graphic.beginFill(hotspot.infections == 0 ?  0x44AA22 : 0xff235a); // Color if no infections = green || orange
+        hotspot.graphic.drawCircle(0, 0, radius);
+        hotspot.graphic.endFill();
+        hotspot.graphic.x = gameW * hotspot.x;
+        hotspot.graphic.y = gameH * hotspot.y;
+        hotspot.graphic.pivot.set(25, 25);
+        hotspot.graphic.interactive = true;
+        hotspot.graphic.hitArea = new PIXI.Circle(0, 0, radius + hotspotBorderLength);
+        mapContainer.addChild(hotspot.graphic);
+        hotspot.graphic.zIndex = 10;
+    
+        hotspot.graphic.mousedown = () => setClickedHotspot(hotspot);
+    }
 }

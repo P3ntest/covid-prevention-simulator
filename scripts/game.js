@@ -11,6 +11,8 @@ let app = new Application({
     antialias: true
 });
 
+devView = false;
+
 //Add Pixi to the DOM
 document.getElementById("game-container").appendChild(app.view);
 app.renderer.resize(window.innerWidth - 250, window.innerHeight);
