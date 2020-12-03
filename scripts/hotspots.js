@@ -4,6 +4,8 @@ let hotspots = [
         y: 0.19,
         name: "Moscow",
         happiness: 0.8,
+        population: 11920000,
+        area: 2500
     },
     {
         x: 0.48,
@@ -16,13 +18,17 @@ let hotspots = [
         x: 0.7,
         y: 0.17,
         name: "Siberia",
-        hapiness: 0.4
+        hapiness: 0.4,
+        population: 33700000,
+        area: 13000000
     },
     {
         x:0.18,
         y:0.2,
         name: "Canada",
-        hapiness: 0.9
+        hapiness: 0.9,
+        population: 37000000,
+        area: 9000000
     }
 ];
 
