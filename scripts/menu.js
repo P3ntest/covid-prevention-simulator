@@ -29,7 +29,7 @@ function updateGlobalStats() {
     document.getElementById("total-hotspots").innerText = hotspotsCount;
     document.getElementById("global-happiness").innerText = globalHappiness;
     document.getElementById("global-trust").innerText = globalTrust;
-    document.getElementById("time-left").innerText = timeToVaccine;
+    document.getElementById("time-left").innerText = formatHours(timeToVaccine);
 }
 
 function setRegionStats(hotspot) {
@@ -38,4 +38,9 @@ function setRegionStats(hotspot) {
     document.getElementById("region-happiness").innerText = Math.floor(hotspot.happiness * 100);
     document.getElementById("region-trust").innerText =  Math.floor(hotspot.trust * 100);
     document.getElementById("region-title").innerText = hotspot.name;
+}
+
+function formatHours(hours) {
+    let days = Math.floor(hours / 24);
+    return days + "d " + (hours % 24) + "h";
 }
