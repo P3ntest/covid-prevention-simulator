@@ -42,16 +42,15 @@ app.view.onmousemove = (ev) => {
     }
 }
 
-//Load map image
-PIXI.loader.add("images/map.png").load(() => {
-    let mapSprite = new Sprite(TextureCache["images/map.png"]);
-    
-    mapSprite.width = document.getElementById("game-container").getBoundingClientRect().width;
-    mapSprite.height = document.getElementById("game-container").getBoundingClientRect().height;
+let mapTexture = new PIXI.Texture.fromImage("images/map.svg", undefined, undefined, 1.0);
 
-    mapContainer.addChild(mapSprite);
-    mapSprite.zIndex = -10;
-});
+let mapSprite = new Sprite(mapTexture);
+
+mapSprite.width = document.getElementById("game-container").getBoundingClientRect().width;
+mapSprite.height = document.getElementById("game-container").getBoundingClientRect().height;
+
+mapContainer.addChild(mapSprite);
+mapSprite.zIndex = -10;
 
 
 hotspots[Math.floor(Math.random() * hotspots.length)].infections = 1; // Infect 1 person.
