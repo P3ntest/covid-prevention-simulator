@@ -62,4 +62,14 @@ redrawHotspots();
 
 updateGlobalStats();
 
+
+//Fade out && remove loading screen after 1000 ms
+// TODO: Fade after PIXI loader handler finished
+setTimeout(() => {
+    document.getElementById("load").style.opacity = 0;
+    setTimeout(() => {
+        document.getElementById("load").remove();
+    }, 400);
+}, 1000) 
+
 tick();

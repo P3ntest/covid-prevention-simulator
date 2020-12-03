@@ -55,3 +55,12 @@
     flex-direction: row;
     justify-content: stretch;
 }
+
+.load {
+    width: 100%;
+    height: 100%;
+    background-color:#282a42;
+    position: fixed;
+    opacity: 1;
+    transition: opacity ease-in-out 0.4s;
+}
