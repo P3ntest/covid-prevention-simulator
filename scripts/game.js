@@ -11,7 +11,7 @@ let app = new Application({
     antialias: true
 });
 
-devView = false;
+devView = true;
 
 //Add Pixi to the DOM
 document.getElementById("game-container").appendChild(app.view);
